@@ -1,0 +1,38 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% if product %}{{ product.name }}{% else %}{% trans "Товар" %}{% endif %} | {% trans "GameZone" %}
+{% endblock %}
+
+{% block content %}
+    <div class="product-detail clearfix">
+        <div class="product-image">
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" 
+                 alt="{{ product.name }}" 
+                 class="img-responsive">
+        </div>
+        
+        <div class="product-info">
+            <h1>{{ product.name }}</h1>
+            <h2>
+                <a href="{{ product.category.get_absolute_url }}">
+                    {{ product.category.name }}
+                </a>
+            </h2>
+            
+            <p class="price">{{ product.price }} {% trans "руб." %}</p>
+            
+            <div class="description">
+                {{ product.description|linebreaks }}
+            </div>
+            
+            <form action="{% url 'cart:cart_add' product.id %}" method="post" class="add-to-cart">
+                {{ cart_product_form }}
+                {% csrf_token %}
+                <input type="submit" value="{% trans 'Добавить в корзину' %}" class="btn">
+            </form>
+        </div>
+    </div>
+{% endblock %}
