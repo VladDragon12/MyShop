@@ -4,7 +4,6 @@ from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator
 
 class Category(models.Model):
-    """Модель категории товаров"""
     name = models.CharField(
         max_length=200,
         db_index=True,
@@ -43,7 +42,6 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    """Модель товара"""
     category = models.ForeignKey(
         Category,
         related_name='products',

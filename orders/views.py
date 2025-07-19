@@ -62,9 +62,8 @@ def order_create(request):
                     price=item['price'],
                     quantity=item['quantity']
                 )
-            # очистка корзины
             cart.clear()
-            order_created.delay(order.id)  # Вызываем задачу с delay()
+            order_created.delay(order.id)
             
             return render(
                 request,

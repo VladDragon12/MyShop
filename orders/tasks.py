@@ -6,10 +6,6 @@ from .models import Order
 
 @shared_task
 def order_created(order_id):
-    """
-    Отправка email-уведомления о создании заказа покупателю.
-    Возвращает количество успешно отправленных писем (0 или 1).
-    """
     order = Order.objects.get(id=order_id)
     
     subject = _('Новый заказ №{}').format(order.id)

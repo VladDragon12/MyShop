@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block title %}
-    Order {{ order.id }} {{ block.super }}
+    Заказ {{ order.id }} {{ block.super }}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -22,17 +22,17 @@
     
     <ul class="object-tools">
         <li>
-            <a href="#" onclick="window.print();">Print order</a>
+            <a href="#" onclick="window.print();">Напечатать заказ</a>
         </li>
     </ul>
     
     <table>
         <tr>
-            <th>Created</th>
+            <th>Создан</th>
             <td>{{ order.created }}</td>
         </tr>
         <tr>
-            <th>Customer</th>
+            <th>Покупатель</th>
             <td>{{ order.first_name }} {{ order.last_name }}</td>
         </tr>
         <tr>
@@ -40,15 +40,15 @@
             <td><a href="mailto:{{ order.email }}">{{ order.email }}</a></td>
         </tr>
         <tr>
-            <th>Address</th>
+            <th>Адрес</th>
             <td>{{ order.address }}, {{ order.postal_code }} {{ order.city }}</td>
         </tr>
         <tr>
-            <th>Total amount</th>
-            <td>${{ order.get_total_cost }}</td>
+            <th>Итог</th>
+            <td>{{ order.get_total_cost }} руб</td>
         </tr>
         <tr>
-            <th>Status</th>
+            <th>Статус</th>
             <td>{% if order.paid %}Paid{% else %}Pending payment{% endif %}</td>
         </tr>
     </table>
@@ -56,13 +56,13 @@
     <div class="module">
         <div class="tabular inline-related last-related">
             <table>
-                <h2>Items bought</h2>
+                <h2>Купленые товары</h2>
                 <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
+                        <th>Товар</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Итог</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,7 +76,7 @@
                     {% endfor %}
                     <tr class="total">
                         <td colspan="3">Total</td>
-                        <td class="num">${{ order.get_total_cost }}</td>
+                        <td class="num">{{ order.get_total_cost }} руб</td>
                     </tr>
                 </tbody>
             </table>

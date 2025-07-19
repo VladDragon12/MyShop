@@ -2,41 +2,41 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans "Checkout" %}
+    {% trans "Оформление" %}
 {% endblock %}
 
 {% block content %}
-    <h1>{% trans "Checkout" %}</h1>
+    <h1>{% trans "Оформление" %}</h1>
     
     <div class="order-info">
-        <h3>{% trans "Your order" %}</h3>
+        <h3>{% trans "Ваш заказ" %}</h3>
         <ul>
             {% for item in cart %}
                 <li>
                     {{ item.quantity }}x {{ item.product.name }}
-                    <span>${{ item.total_price }}</span>
+                    <span>{{ item.total_price }} руб</span>
                 </li>
             {% endfor %}
             
             {% if cart.coupon %}
                 <li>
                     {% blocktrans with code=cart.coupon.code discount=cart.coupon.discount %}
-                        "{{ code }}" ({{ discount }}% off)
+                        "{{ code }}" ({{ discount }}% скидка)
                     {% endblocktrans %}
-                    <span>- ${{ cart.get_discount|floatformat:"2" }}</span>
+                    <span>- {{ cart.get_discount|floatformat:"2" }} руб</span>
                 </li>
             {% endif %}
         </ul>
         
         <p>
-            {% trans "Total" %}: ${{ cart.get_total_price_after_discount|floatformat:"2" }}
+            {% trans "Итог" %}: {{ cart.get_total_price_after_discount|floatformat:"2" }} руб
         </p>
     </div>
 
     <form action="." method="post" class="order-form">
         {{ form.as_p }}
         <p>
-            <input type="submit" value="{% trans 'Place order' %}" class="btn btn-primary">
+            <input type="submit" value="{% trans 'Сделать заказ' %}" class="btn btn-primary">
         </p>
         {% csrf_token %}
     </form>

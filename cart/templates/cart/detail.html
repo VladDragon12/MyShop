@@ -36,8 +36,8 @@
               <span style="display:none">Current: {{ item.quantity }}</span>
             </td>
             <td><a href="{% url 'cart:cart_remove' product.id %}">Удалить</a></td>
-            <td class="num">${{ item.price }}</td>
-            <td class="num">${{ item.total_price }}</td>
+            <td class="num">{{ item.price }} руб</td>
+            <td class="num">{{ item.total_price }} руб</td>
           </tr>
         {% endwith %}
       {% endfor %}
@@ -45,7 +45,7 @@
     <tr class="subtotal">
         <td>Подитог</td>
         <td colspan="4"></td>
-        <td class="num">${{ cart.get_total_price }}</td>
+        <td class="num">{{ cart.get_total_price }} руб</td>
     </tr>
     <tr>
         <td>
@@ -54,7 +54,7 @@
         </td>
         <td colspan="4"></td>
         <td class="num neg">
-            - ${{ cart.get_discount|floatformat:"2" }}
+            - {{ cart.get_discount|floatformat:"2" }} руб
         </td>
     </tr>
 {% endif %}
@@ -62,7 +62,7 @@
     <td>Всего</td>
     <td colspan="4"></td>
     <td class="num">
-        ${{ cart.get_total_price_after_discount|floatformat:"2" }}
+        {{ cart.get_total_price_after_discount|floatformat:"2" }} руб
     </td>
 </tr>
     </tbody>
